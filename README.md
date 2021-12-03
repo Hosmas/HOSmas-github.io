@@ -3,30 +3,8 @@
 
 # 문제1. Add quotes to ansible playbook
 ---------------------------------------
-```
-//Start file
-- hosts: all
-  vars:
-    ssh_state: True
-  tasks:
-    - name: Manage openssh
-      package:
-        name: openssh
-        state: {{ ssh_state }}
-```
+Add quotes to ansible playbook 문제는 파일의 특정 부분을 큰따옴표("")로 감싸야 하는 문제였다.
 
-```
-//End file
-- hosts: all
-  vars:
-    ssh_state: True
-  tasks:
-    - name: Manage openssh
-      package:
-        name: openssh
-        state: "{{ ssh_state }}"
-```
-------------------------
 + 나의 최초 시도
 ![1번 1차시도](https://user-images.githubusercontent.com/94365974/144589181-ff377111-767d-4346-9262-2471a990783b.gif)
 
@@ -37,3 +15,62 @@
 ![1번 2차 시도](https://user-images.githubusercontent.com/94365974/144589376-c1024039-d9ff-4d63-9e57-ec4bc38ec181.gif)
  이번 시도에서는 위의 시도에서 상하좌우 방향키를 통해 이동하는 것은 매우 큰 낭비라고 생각하여 G(파일의 마지막 라인으로 이동)을 이용하여 타자 수를 줄였다.
  그 후에도 A(현재 라인 끝에서 입력 시작)하여 불필요하게 이동할 필요를 없앴고, 라인 끝에 "을 삽입한 후에는 b(단어 단위로 이동)하여 방향키보다 더 적게 다음 위치로 이동하여 "을 삽입했다.
+ ----------------------------------------
+ 
+ # 문제2. simple replacements
+ ---------------------------
+ simple replacements 문제는 말 그대로 특정 단어(sublime, emacs)를 치환(vim으로)하는 문제였다.
+ -------------------------
+ + 나의 최초 시도
+ ![2번 1차 시도](https://user-images.githubusercontent.com/94365974/144591618-878c2a60-c6d3-4e2f-b3e3-7971a570e0f3.gif)
+
+첫 번째 시도에서는 `:%s/str/reaplace/g`(파일 전체의 str을 replace로 치환)를 통해서 두 번에 걸쳐서 파일 전체의 sublime과 emacs를 vim으로 치환하는 과정을 거쳤다.
+```
+:%s/sublime/vim/g 
+:%s/emacs/vim/g
+```
+------------------------
++ 나의 최고점 시도
+![2번 2차 시도](https://user-images.githubusercontent.com/94365974/144591827-7d35c2fe-7c30-4a4d-ab38-349668a34873.gif)
+다음 시도에서는 첫 번째 시도에서 두 번에 걸쳐서 치환하는 과정을 단 한 번으로 줄인다면 전과 대비해서 많은 타자수를 절약할 수 있을 것이라 생각했다.
+`:%s/\(sublime\|emacs\)/vim/g`를 통해 한 번에 파일 전체의 sublime과 emacs를 vim으로 치환하는데 성공하였다.
+------------------------
+# 문제3.  Satisfy the go linter
+------------------------
+ Satisfy the go linter 문제는 파일의 중간에 특정 문장 2개를 삽입해야하는 문제였다.
+ ---------------
+  + 나의 최고점 시도
+![3번 1차 시도](https://user-images.githubusercontent.com/94365974/144592646-ed939b3b-6e78-4c7c-8d3d-2a35a8aa69cc.gif)
+처음에는 문장 두 번을 이동하면서 전부 타이핑해야 한다고 생각했었다.
+그러나, // Version TODO, // Debug TODO는 겹치는 부분이 있기 때문에 하나를 입력하고 복사하여 다른 부분만 고치는 방법을 선택했다.
+먼저, 문장을 삽입할 라인으로 커서를 이동하고 O(현재 라인을 한 줄 뒤로 밀고 입력 시작)하여 // Version TODO 를 삽입한다.
+그 후에 입력을 종료하고 yy(현재 라인 복사)로 // Version TODO로 복사한 후에 커서를 다음 위치로 이동한다.
+p를 통해 현재 위치에 붙여넣기를 하고, R(바꾸기 모드로 입력 시작)하여 Version 부분을 Debug로 바꿔주면 끝이다.
+----------------
+# 문제4. Plotting some variables in python
+----------------
+완전히 똑같은 4개의 문장들 속의 몇몇 값들을 다른 값으로 변경해야 하는 문제였다. 
+----------------
++ 나의 최초 시도
+![4번 1차 시도](https://user-images.githubusercontent.com/94365974/144593537-29789191-94e7-4d60-ae7d-b521a3bbc200.gif)
+문제를 처음 봤을 때는 치환을 통해 고쳐야 한다는 생각이 먼저 들었지만, 곰곰히 생각해보니 오히려 그런 방법은 치환을 열댓번 가량 해야하기 때문에 좋지 않다고 깨달았다.
+뭔가 방법이 있지 않을까 고민해보았지만, 좋은 방법이 떠오르지 않아 일단은 i(현재 위치에서 입력 시작)을 통해 일일히 수정했다.
+----------------
+ + 나의 최고점 시도
+ ![4번 2차 시도](https://user-images.githubusercontent.com/94365974/144594238-bba543cd-f935-47c9-a25f-4614f4e6b1f4.gif)
+결국 획기적인 방법은 떠오르지 않았지만, 다른 것에 비해 고치는 데 타수가 많이 필요한 y1을 abs(y1)을 고치는 것은 치환을 통해 해결해보기로 했다.
+`:%s/y1/abs(y1)/g`로 y1을 모두 abs(y1)으로 고친 후에 나머지는 전의 시도와 동일하게 수정하여 타수를 조금 절약하는데 성공했다.
+-----------------
+# 문제 5. Python dataclasses
+---------------------
+문장을 큰따옴표"" 안에 감싸야 했던 문제 1과는 다르게 Python dataclasses 문제는 큰따옴표 "" 안에 문장을 넣어야한다.
+`````````````````````
++ 나의 최초 시도
+![5번 1차 시도](https://user-images.githubusercontent.com/94365974/144594916-3643df5e-48e4-46f5-9103-c68977fe033a.gif)
+문제 1을 해결했던 방법과 동일하게 G(파일의 마지막 라인으로 이동)와 A(현재 라인 끝에서 입력 시작)를 통해 큰따옴표"" 안에 문장을 집어넣었다.
+----------------------
++ 나의 두 번째 시도
+![5번 2차 시도](https://user-images.githubusercontent.com/94365974/144594952-64b5787a-5bee-4cb2-b6e5-3fef0b3306a9.gif)
+첫 번째 시도는 꽤 만족스러운 결과였지만, 문득 치환을 통해 해결해보는 것은 어떨까 라는 생각이 들어서 큰따옴표""를 "문장" 치환해보자는 시도를 해봤다.
+`:%s/""/"student_id,name,age,score/g`를 통해 치환했지만, 타수는 첫 번째 시도보다 오히려 더 높은 유감스로운 결과가 나왔다.
+-----------------------
