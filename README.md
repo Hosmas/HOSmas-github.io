@@ -14,6 +14,7 @@
         name: openssh
         state: {{ ssh_state }}
 ```
+
 ```
 //End file
 - hosts: all
@@ -24,6 +25,7 @@
       package:
         name: openssh
         state: "{{ ssh_state }}"
-        ```
-+첫번째 시도
-![1번 1차시도](https://user-images.githubusercontent.com/94365974/144589063-1833fa68-b600-482e-b549-1d67a9b31377.gif)
+```
+첫번째 시도
+
+![1번 1차시도](https://user-images.githubusercontent.com/94365974/144589181-ff377111-767d-4346-9262-2471a990783b.gif)
