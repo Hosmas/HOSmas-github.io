@@ -25,3 +25,5 @@
         name: openssh
         state: "{{ ssh_state }}"
         ```
++첫번째 시도
+![1번 1차시도](https://user-images.githubusercontent.com/94365974/144589063-1833fa68-b600-482e-b549-1d67a9b31377.gif)
